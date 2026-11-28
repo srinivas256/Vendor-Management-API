@@ -21,6 +21,7 @@ services:
     container_name: myapp-api
     environment:
       DATABASE_URL: "postgresql+psycopg://postgres:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/myapp"
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?Set JWT_SECRET_KEY in .env}
     ports:
       - "8000:8000"
     depends_on:

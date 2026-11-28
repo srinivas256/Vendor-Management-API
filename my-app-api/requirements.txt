@@ -3,3 +3,6 @@ sqlalchemy
 psycopg[binary]
 python-dotenv
 alembic
+email-validator
+pwdlib[argon2]
+PyJWT

@@ -49,6 +49,7 @@ Docker runs both the PostgreSQL database (`myapp`) and the FastAPI app together 
 
 ### Step 1: Configure Your Database Password
 Copy `.env.example` to `.env`, then set `POSTGRES_PASSWORD` to a strong URL-safe password. Use that same password in `DATABASE_URL`. Keep `.env` private; it is excluded from Git.
+Also set `JWT_SECRET_KEY` to a private random value of at least 32 characters. Generate one with `python -c "import secrets; print(secrets.token_urlsafe(48))"`.
 
 ```powershell
 Copy-Item .env.example .env
@@ -85,6 +86,17 @@ Open your browser and go to:
 * **Root Endpoint:** `http://127.0.0.1:8000/`
 
 In `/docs`, you can click **Try it out** on `POST /users/` to add a user and `GET /users/` to view saved users.
+
+### Start the Worklink React App
+The sibling `D:\Python\labor-connect` project provides laborer and vendor registration, login, and dashboards. After the API and database are running and migrations have been applied:
+
+```powershell
+Set-Location D:\Python\labor-connect
+npm.cmd install
+npm.cmd run dev
+```
+
+Open the Vite URL shown in the terminal (normally `http://localhost:5173`). Register as a laborer to create a discoverable worker profile, or as a vendor to search profiles and contact workers. Only authenticated vendor accounts can access the labor directory. The API requires `JWT_SECRET_KEY` in `.env` for registration and login.
 
 ### Helpful Docker Commands
 * **View live API logs:** `docker compose logs -f api` (press `Ctrl + C` to exit)
